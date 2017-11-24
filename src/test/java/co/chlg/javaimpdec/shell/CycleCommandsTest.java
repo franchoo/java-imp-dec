@@ -53,7 +53,7 @@ public class CycleCommandsTest {
     // Then...
     assertThat(result, instanceOf(String[].class));
     assertArrayEquals(new String[]{"Bob", "Alice", "Bob"}, (String[]) result);
-    log.info(result);
+    log.info(Arrays.asList((String[]) result));
   }
 
   @Test
