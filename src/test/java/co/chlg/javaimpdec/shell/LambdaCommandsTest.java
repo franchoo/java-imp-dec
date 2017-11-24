@@ -33,7 +33,7 @@ public class LambdaCommandsTest {
     // String [] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     Stream<Integer> input = IntStream.rangeClosed(1, 10).boxed();
     // When...
-    Object result = shell.evaluate(streamInput("do-mult-pairs", input));
+    Object result = shell.evaluate(inputFrom("do-mult-pairs", input));
     // Then...
     assertThat(result, is(3840));
   }

@@ -35,7 +35,7 @@ public class CycleCommandsTest {
     Stream<String> input = Stream
         .of("www.google.com.co", "application.device", "frank.d.cardona", "192.168.10.12");
     // When...
-    Object result = shell.evaluate(streamInput("do-flat-map", input));
+    Object result = shell.evaluate(inputFrom("do-flat-map", input));
     // Then...
     assertThat(result, instanceOf(Set.class));
     assertThat((Set<String>) result, hasItems("d", "co", "com", "www", "10", "12", "device"));
@@ -49,7 +49,7 @@ public class CycleCommandsTest {
     Stream<Long> scoresA = Stream.of(1234567890L, 4569871230L, 5632147890L);
     Stream<Long> scoresB = Stream.of(9856327410L, 2589637410L, 5632891470L);
     // When...
-    Object result = shell.evaluate(streamInputs("do-name-scores Alice Bob", scoresA, scoresB));
+    Object result = shell.evaluate(inputFrom("do-name-scores Alice Bob", scoresA, scoresB));
     // Then...
     assertThat(result, instanceOf(String[].class));
     assertArrayEquals(new String[]{"Bob", "Alice", "Bob"}, (String[]) result);
@@ -63,7 +63,7 @@ public class CycleCommandsTest {
     Stream<String> input = Stream
         .of("tom-hanks", "tom-cruise", "alec-baldwin", "anne-hathaway", "hugh-jackman");
     // When...
-    Object result = shell.evaluate(streamInput("do-sort-lastnames", input));
+    Object result = shell.evaluate(inputFrom("do-sort-lastnames", input));
     // Then...
     assertThat(result, instanceOf(List.class));
     assertEquals(
