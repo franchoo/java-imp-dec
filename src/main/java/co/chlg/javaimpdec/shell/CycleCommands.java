@@ -1,6 +1,8 @@
 package co.chlg.javaimpdec.shell;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
+import static org.apache.commons.lang3.StringUtils.substringAfter;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,6 +32,12 @@ public class CycleCommands {
     Iterator<Long> iterB = scoresB.iterator();
     scoresA.forEach(a -> res.add(a > iterB.next() ? nameA : nameB));
     return res.toArray(new String[res.size()]);
+  }
+
+  @ShellMethod(group = "cycle", value = "Ejercicio de ordenamiento")
+  private List<String> doSortLastnames(@ShellOption List<String> people) {
+    return people.stream().sorted(comparing(x -> substringAfter(x, "-")))
+        .collect(toList());
   }
 
 }
