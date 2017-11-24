@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/monad")
 public class MonadController {
 
-  @GetMapping("/map-age/:name")
-  private Map<String, String> getMappingNameAge(@PathVariable("name") String name) {
+  @GetMapping("/map-age/{fullName}")
+  private Map<String, Integer> getMappingNameAge(@PathVariable("fullName") String fullName) {
     return null;
   }
 

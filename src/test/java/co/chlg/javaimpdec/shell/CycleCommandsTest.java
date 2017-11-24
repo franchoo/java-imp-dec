@@ -18,9 +18,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.shell.Shell;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
 @RunWith(SpringRunner.class)
 @Import(TestApplicationRunner.class)
+@SpringBootTest
 public class CycleCommandsTest {
 
   private static final Logger log = Logger.getLogger(CycleCommandsTest.class);

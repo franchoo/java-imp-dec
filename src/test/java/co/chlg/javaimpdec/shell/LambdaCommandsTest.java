@@ -16,9 +16,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.shell.Shell;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
 @RunWith(SpringRunner.class)
 @Import(TestApplicationRunner.class)
+@SpringBootTest
 public class LambdaCommandsTest {
 
   @SuppressWarnings("unused")
