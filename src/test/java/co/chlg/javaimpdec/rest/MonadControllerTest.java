@@ -33,15 +33,16 @@ public class MonadControllerTest {
 
   @Before
   public void setUp() {
-    url = URI.create("http://localhost:" + port + "/monad/map-age/");
+    url = URI.create("http://localhost:" + port + "/monad/");
   }
 
   @Test
   @SuppressWarnings("unchecked")
   public void getAgeFormNamesLength() {
     // Given...
+    final String OPERATION = "map-age/";
     final String NAME = "Maria Gutierrez";
-    URI uri = url.resolve(NAME.replace(" ", "%20"));
+    URI uri = url.resolve(OPERATION.concat(NAME.replace(" ", "%20")));
     // When...
     ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
     // Then...

@@ -9,10 +9,11 @@ import org.springframework.shell.standard.ShellOption;
 public class LambdaCommands {
 
   @ShellMethod(group = "lambda", value = "Ejercicio de SAM y lambda")
-  private int doMultPairs(@ShellOption List<Integer> params) {
+  private long doMultPairs(@ShellOption List<Integer> params) {
     return params.stream()
         .filter(x -> x % 2 == 0)
-        .reduce(1, (a, b) -> a * b);
+        .map(Long::valueOf)
+        .reduce(1L, (a, b) -> a * b);
   }
 
 }

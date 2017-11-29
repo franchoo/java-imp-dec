@@ -30,12 +30,12 @@ public class LambdaCommandsTest {
   @Test
   public void filterPairsAndMultiply() {
     // Given...
-    // String [] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    Stream<Integer> input = IntStream.rangeClosed(1, 10).boxed();
+    // String [] input = { 1, 2, 3, 4, 5, ..., 30};
+    Stream<Integer> input = IntStream.rangeClosed(1, 30).boxed();
     // When...
     Object result = shell.evaluate(inputFrom("do-mult-pairs", input));
     // Then...
-    assertThat(result, is(3840));
+    assertThat(result, is(42849873690624000L));
   }
 
 }
