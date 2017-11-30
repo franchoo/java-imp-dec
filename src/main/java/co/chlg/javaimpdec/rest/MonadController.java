@@ -20,7 +20,10 @@ public class MonadController {
   @GetMapping("/map-count/{luckyNum}/size/{exp}/from/{qty}")
   private Map<Integer, Integer> getMappingNumRandomsCount(@PathVariable("luckyNum") int luckyNum,
       @PathVariable("exp") int exp, @PathVariable("qty") int qty) {
-    return null;
+    return singletonMap(luckyNum,
+        (int) generate(() -> nextInt(0, (int) Math.pow(10, exp))).limit(qty)
+            .filter(x -> x == luckyNum)
+            .count());
   }
 
   @GetMapping("/map-fibonacci/{num}")
