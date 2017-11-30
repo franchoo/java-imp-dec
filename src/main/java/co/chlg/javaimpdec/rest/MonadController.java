@@ -6,7 +6,10 @@ import static java.util.stream.Stream.generate;
 import static java.util.stream.Stream.iterate;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Stream;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +38,12 @@ public class MonadController {
   @GetMapping("/map-age/{fullName}")
   private Map<String, Integer> getMappingNameAge(@PathVariable("fullName") String fullName) {
     // TODO: sequential & reduce will be useful
-    return null;
+
+    int age = Arrays.stream(fullName.split(" "))
+            .mapToInt(String::length)
+            .reduce(0, (previousLength, currentLength) -> previousLength * 10 + currentLength);
+
+    return singletonMap(fullName, age);
   }
 
 }
