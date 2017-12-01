@@ -3,11 +3,9 @@ package co.chlg.javaimpdec.rest;
 import static java.util.Arrays.stream;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Stream.generate;
-import static java.util.stream.Stream.iterate;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
 import java.util.Map;
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +19,7 @@ public class MonadController {
   private Map<Integer, Integer> getMappingNumRandomsCount(@PathVariable("luckyNum") int luckyNum,
       @PathVariable("exp") int exp, @PathVariable("qty") int qty) {
     return singletonMap(luckyNum,
-        (int) generate(() -> nextInt(0, (int) Math.pow(10, exp))).limit(qty)
-            .filter(x -> x == luckyNum)
-            .count());
+        (int) generate(() -> nextInt(0, (int) Math.pow(10, exp))).limit(qty).filter(x -> x == luckyNum).count());
   }
 
   @GetMapping("/map-fibonacci/{num}")
@@ -34,8 +30,9 @@ public class MonadController {
 
   @GetMapping("/map-age/{fullName}")
   private Map<String, Integer> getMappingNameAge(@PathVariable("fullName") String fullName) {
-    // TODO: sequential & reduce will be useful
-    return null;
+    //Se pasa fullName a stream con split. luego un filter en caso de mas de un espacio entre palabras. luego se hace map para obtener cantidad de caracteres con length y por ultimo se hace un reduce que permite concatenar los int
+    return singletonMap(fullName, Integer.valueOf(stream(fullName.split(" ")).filter(x -> x.length() > 0)
+        .map(x -> String.valueOf(x.length())).reduce("", (a, b) -> a + b)));
   }
 
 }
