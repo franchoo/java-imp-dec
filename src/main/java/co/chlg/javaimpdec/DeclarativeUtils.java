@@ -1,8 +1,11 @@
 package co.chlg.javaimpdec;
 
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
+
 import org.springframework.shell.Input;
 
 /**
@@ -31,5 +34,15 @@ public final class DeclarativeUtils {
     // Consume the Stream outside the lambda, to avoid IllegalStateException
     return () -> command;
   }
+  
+  public static Boolean validarDisponibilidad(Semaphore semaforo){
+		Predicate<Semaphore> predicate = (x -> x.tryAcquire());
+		return predicate.test(semaforo);
+	}
+	
+	public static Boolean liberarDisponibilidad(Semaphore semaforo){
+		semaforo.release(1);
+		return null;
+	}
 
 }

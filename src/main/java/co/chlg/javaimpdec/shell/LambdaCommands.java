@@ -1,11 +1,17 @@
 package co.chlg.javaimpdec.shell;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
+import java.util.concurrent.Semaphore;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.stream.IntStream;
+
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+
+import co.chlg.javaimpdec.DeclarativeUtils;
 
 @ShellComponent
 public class LambdaCommands {
@@ -28,9 +34,11 @@ public class LambdaCommands {
 
   @ShellMethod(group = "lambda", value = "Ejercicio de sincronia y lambda")
   private List<Boolean> doAllowEntry(@ShellOption List<String> party) {
-    Supplier<Boolean> releaseAndNull = null;
     // TODO: Can implement releaseAndNull supplier to help map easily in the implementation
-    return null;
+    Semaphore semaforo = new Semaphore(2);
+    return IntStream.range(0, party.size()).mapToObj(i -> !party.get(i).equals("...") ? DeclarativeUtils.validarDisponibilidad(semaforo) : DeclarativeUtils.liberarDisponibilidad(semaforo))
+    		.collect(toList());
+	 
   }
-
+  
 }
