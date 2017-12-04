@@ -11,6 +11,7 @@ import static org.apache.commons.lang3.RandomUtils.nextInt;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -46,8 +47,8 @@ public class MonadController {
 
   @GetMapping("/map-age/{fullName}")
   private Map<String, Integer> getMappingNameAge(@PathVariable("fullName") String fullName) {
-    // TODO: sequential & reduce will be useful
-    return null;
+    return singletonMap(fullName,Stream.of(fullName.split(" ")).sequential().map(x->String.valueOf(x.length()))
+            .reduce(String::concat).map(Integer::parseInt).get());
   }
 
 }
