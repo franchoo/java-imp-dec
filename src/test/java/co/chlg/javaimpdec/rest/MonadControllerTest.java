@@ -47,6 +47,7 @@ public class MonadControllerTest {
     URI uri = url.resolve("map-count/" + LUCKY_NUM + "/size/" + 2 + "/from/" + (10000));
     // When...
     ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
+    System.out.print(response);
     // Then...
     assertThat(response.getStatusCode(), is(OK));
     assertThat(response.getHeaders().getContentType().toString(),
@@ -61,7 +62,7 @@ public class MonadControllerTest {
   @SuppressWarnings("unchecked")
   public void getFibonacci20() {
     // Given...
-    final String NUM = "20";
+    final String NUM = "21";
     URI uri = url.resolve("map-fibonacci/" + NUM);
     // When...
     ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
