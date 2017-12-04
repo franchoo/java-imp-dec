@@ -43,15 +43,17 @@ public class LambdaCommandsTest {
   @Test
   public void incrementVocalCounter() {
     // Given...
-    final String METHOD = "do-update-vocal-count";
+    final String METHOD = "do-update-vocal-count";  
     // When...
     Object result1 = shell.evaluate(inputFrom(METHOD, Stream.of("Lorena", "María")));
     Object result2 = shell.evaluate(inputFrom(METHOD, Stream.of("Miguel", "Ramón", "Floréncia")));
     Object result3 = shell.evaluate(inputFrom(METHOD, Stream.of("Fábio", "Consúelo")));
+    Object result4 = shell.evaluate(inputFrom(METHOD, Stream.of("JOSÉ", "ÁLVARO"))); // add new evaluate with upper case
     // Then...
     assertThat(result1, is(6));  // starts with 6 vocals
     assertThat(result2, is(15)); // adds 9 plus 6 vocals
     assertThat(result3, is(22)); // adds 7 plus 9 & 6 vocals
+    assertThat(result4, is(27)); // adds 5 plus 7 & 9 & 6 vocals // Add new test for upper case
   }
 
   @Test
