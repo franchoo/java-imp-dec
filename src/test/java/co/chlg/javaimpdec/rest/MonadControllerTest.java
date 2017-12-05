@@ -61,17 +61,19 @@ public class MonadControllerTest {
   @SuppressWarnings("unchecked")
   public void getFibonacci20() {
     // Given...
-    final String NUM = "20";
-    URI uri = url.resolve("map-fibonacci/" + NUM);
+    final String RESOURCE = "map-fibonacci/";
     // When...
-    ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
+    ResponseEntity<Map> resp1 = testRest.getForEntity(url.resolve(RESOURCE + 5), Map.class);
+    ResponseEntity<Map> resp2 = testRest.getForEntity(url.resolve(RESOURCE + 22), Map.class);
     // Then...
-    assertThat(response.getStatusCode(), is(OK));
-    assertThat(response.getHeaders().getContentType().toString(),
-        startsWith(APPLICATION_JSON_VALUE));
-    assertThat(response.getBody(), notNullValue());
-    assertThat((Set<String>) response.getBody().keySet(), hasItem(NUM));
-    assertThat(response.getBody().get(NUM), is(10946)); // Fibonacci number in 20th position!
+    assertThat(resp1.getStatusCode(), is(OK));
+    assertThat(resp1.getHeaders().getContentType().toString(), startsWith(APPLICATION_JSON_VALUE));
+    assertThat(resp1.getBody(), notNullValue());
+    assertThat(resp1.getBody().get("5"), is(5)); // Fibonacci number in 5th position!
+    assertThat(resp2.getStatusCode(), is(OK));
+    assertThat(resp2.getHeaders().getContentType().toString(), startsWith(APPLICATION_JSON_VALUE));
+    assertThat(resp2.getBody(), notNullValue());
+    assertThat(resp2.getBody().get("22"), is(17711)); // Fibonacci number in 22th position!
   }
 
   @Test

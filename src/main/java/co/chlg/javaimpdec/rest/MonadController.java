@@ -32,8 +32,8 @@ public class MonadController {
   private Map<Integer, Integer> getMappingNumFib(@PathVariable("num") int num) {
     // TODO: Pair, skip, findFirst will help you get the job done
     return singletonMap(num,
-        iterate(Pair.of(0, 1), vals -> Pair.of(vals.getRight(), vals.getRight() + vals.getLeft()))
-            .limit(num + 1).skip(num).findFirst().map(Pair::getValue).orElse(null));
+        iterate(Pair.of(0, 1), seq -> Pair.of(seq.getRight(), seq.getLeft() + seq.getRight()))
+            .skip(num).findFirst().map(Pair::getLeft).orElse(null));
   }
 
   @GetMapping("/map-age/{fullName}")

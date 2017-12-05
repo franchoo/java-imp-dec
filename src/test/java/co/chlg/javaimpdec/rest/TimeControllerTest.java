@@ -7,9 +7,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import co.chlg.javaimpdec.TestApplicationRunner;
 import java.net.URI;
-import java.time.Duration;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +41,7 @@ public class TimeControllerTest {
   @SuppressWarnings("unchecked")
   public void getThousandRandomDuration() {
     // Given...
-    URI uri = url.resolve("duration-rand/" + (2000 * 1000 * 1000));
+    URI uri = url.resolve("duration-rand/" + (200 * 1000 * 1000));
     // When...
     ResponseEntity<String> response = testRest.getForEntity(uri, String.class);
     // Then...

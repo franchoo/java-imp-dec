@@ -57,12 +57,16 @@ public class LambdaCommandsTest {
   @Test
   public void onlyTwoEnter() {
     // Given...
-    Stream<String> input = Stream.of("me", "you", "he", "...", "it", "she", "this", "...", "that");
+    Stream<String> party1 = Stream.of("me", "you", "he", "...", "it", "she", "this", "...", "that");
+    Stream<String> party2 = Stream.of("nope", "...", "...", "yes", "go", "...", "also", "wrong");
     // When...
-    Object result = shell.evaluate(inputFrom("do-allow-entry", input));
+    Object result1 = shell.evaluate(inputFrom("do-allow-entry", party1));
+    Object result2 = shell.evaluate(inputFrom("do-allow-entry", party2));
     // Then...
-    assertThat(result, instanceOf(List.class));
-    assertEquals(Arrays.asList(true, true, false, null, true, false, false, null, true), result);
+    assertThat(result1, instanceOf(List.class));
+    assertThat(result2, instanceOf(List.class));
+    assertEquals(Arrays.asList(true, true, false, null, true, false, false, null, true), result1);
+    assertEquals(Arrays.asList(false, null, null, true, true, null, true, false), result2);
   }
 
 }
