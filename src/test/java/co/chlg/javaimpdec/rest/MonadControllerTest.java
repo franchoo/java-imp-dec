@@ -68,7 +68,8 @@ public class MonadControllerTest {
     // When...
     Fibonacci fibonacci = new Fibonacci();
     
-    ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
+    @SuppressWarnings("rawtypes")
+	ResponseEntity<Map> response = testRest.getForEntity(uri, Map.class);
     // Then...
     
     assertThat(response.getStatusCode(), is(OK));
