@@ -28,4 +28,10 @@ public class TimeController {
     return null;
   }
 
+  @GetMapping("/get-first/{dayOfWeek}/from/{year}/month/{month}/")
+  private Integer getFirstWeekDay(@PathVariable("year") int year, @PathVariable("month") int month,
+      @PathVariable("dayOfWeek") String dayOfWeek) {
+    return null;
+  }
+
 }

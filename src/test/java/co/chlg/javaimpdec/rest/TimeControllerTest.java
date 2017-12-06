@@ -3,10 +3,10 @@ package co.chlg.javaimpdec.rest;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import co.chlg.javaimpdec.TestApplicationRunner;
 import java.net.URI;
+import java.time.DayOfWeek;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +60,20 @@ public class TimeControllerTest {
     // Then...
     assertThat(response.getStatusCode(), is(OK));
     assertThat(response.getBody(), is(5));
+    log.info(response.getBody());
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void getFirstWedOfDic2017() {
+    // Given...
+    URI uri = url
+        .resolve("get-first/" + DayOfWeek.WEDNESDAY.name() + "/from/" + 2017 + "/month/" + 12);
+    // When...
+    ResponseEntity<Integer> response = testRest.getForEntity(uri, Integer.class);
+    // Then...
+    assertThat(response.getStatusCode(), is(OK));
+    assertThat(response.getBody(), is(6));
     log.info(response.getBody());
   }
 
