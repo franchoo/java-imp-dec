@@ -27,3 +27,4 @@ nbdist/
 
 ### Others ###
 *.log
+/bin/
