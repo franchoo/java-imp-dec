@@ -51,8 +51,8 @@ public class CycleCommandsTest {
     // When...
     Object result = shell.evaluate(inputFrom("do-name-scores Alice Bob", scoresA, scoresB));
     // Then...
-    assertThat(result, instanceOf(String[].class));
-    assertArrayEquals(new String[]{"Bob", "Alice", "Bob"}, (String[]) result);
+    assertThat(result, instanceOf(List.class));
+    assertEquals(Arrays.asList("Bob", "Alice", "Bob"), result);
     log.info(Arrays.asList((String[]) result));
   }
 

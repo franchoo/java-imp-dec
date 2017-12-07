@@ -1,7 +1,8 @@
 package co.chlg.javaimpdec.shell;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class CycleCommands {
   }
 
   @ShellMethod(group = "cycle", value = "Ejercicio de comparación")
-  private String[] doNameScores(@ShellOption String nameA, @ShellOption String nameB,
+  private List<String> doNameScores(@ShellOption String nameA, @ShellOption String nameB,
       @ShellOption List<Long> scoresA, @ShellOption List<Long> scoresB) {
     /*
     List<String> res = new LinkedList<>();
@@ -35,7 +36,7 @@ public class CycleCommands {
     */
     return IntStream.range(0, scoresA.size())
         .mapToObj(i -> scoresA.get(i) > scoresB.get(i) ? nameA : nameB)
-        .toArray(String[]::new);
+        .collect(toList());
   }
 
   @ShellMethod(group = "cycle", value = "Ejercicio de ordenamiento")

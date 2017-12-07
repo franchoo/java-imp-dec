@@ -59,7 +59,7 @@ public class TimeControllerTest {
     ResponseEntity<Integer> response = testRest.getForEntity(uri, Integer.class);
     // Then...
     assertThat(response.getStatusCode(), is(OK));
-    assertThat(response.getBody(), is(5));
+    assertThat(response.getBody(), is(7));
     log.info(response.getBody());
   }
 

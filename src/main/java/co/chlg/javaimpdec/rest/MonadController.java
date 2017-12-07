@@ -30,7 +30,7 @@ public class MonadController {
 
   @GetMapping("/map-fibonacci/{num}")
   private Map<Integer, Integer> getMappingNumFib(@PathVariable("num") int num) {
-    // TODO: Pair, skip, findFirst will help you get the job done
+    // Pair.of(0, 1) Pair.of(1, 1) Pair.of(1, 2) Pair.of(2, 3) Pair.of(3, 5) //fib(5)==5
     return singletonMap(num,
         iterate(Pair.of(0, 1), seq -> Pair.of(seq.getRight(), seq.getLeft() + seq.getRight()))
             .skip(num).findFirst().map(Pair::getLeft).orElse(null));
