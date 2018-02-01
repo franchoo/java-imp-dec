@@ -2,29 +2,39 @@ package co.chlg.javaimpdec.rest;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 import static org.springframework.http.HttpStatus.OK;
 
 import co.chlg.javaimpdec.TestApplicationRunner;
 import java.net.URI;
 import java.time.DayOfWeek;
-import org.apache.log4j.Logger;
+import java.time.LocalDateTime;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(LocalDateTime.class)
+@PowerMockRunnerDelegate(SpringRunner.class)
 @Import(TestApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TimeControllerTest {
 
-  private static final Logger log = Logger.getLogger(TimeControllerTest.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   private URI url;
   @LocalServerPort
@@ -47,20 +57,23 @@ public class TimeControllerTest {
     // Then...
     assertThat(response.getStatusCode(), is(OK));
     assertThat(response.getBody(), instanceOf(String.class));
-    log.info(response.getBody());
+    LOG.info(response.getBody());
   }
 
   @Test
   @SuppressWarnings("unchecked")
-  public void getDayAfter10Hours() {
+  public void getDayAfter10Hours() throws Exception {
     // Given...
+    //mockStatic(LocalDateTime.class);
+    //given(LocalDateTime.now()).willReturn(LocalDateTime.of(2017, 12, 6, 19, 0));
     URI uri = url.resolve("add-hours-return-day/" + 10);
     // When...
+    //whenNew(LocalDateTime.class).withAnyArguments().thenReturn(LocalDateTime.of(2017, 12, 6, 19, 0));
     ResponseEntity<Integer> response = testRest.getForEntity(uri, Integer.class);
     // Then...
     assertThat(response.getStatusCode(), is(OK));
     assertThat(response.getBody(), is(7));
-    log.info(response.getBody());
+    LOG.info(response.getBody());
   }
 
   @Test
@@ -74,7 +87,8 @@ public class TimeControllerTest {
     // Then...
     assertThat(response.getStatusCode(), is(OK));
     assertThat(response.getBody(), is(6));
-    log.info(response.getBody());
+    LOG.info(response.getBody());
   }
 
 }
+

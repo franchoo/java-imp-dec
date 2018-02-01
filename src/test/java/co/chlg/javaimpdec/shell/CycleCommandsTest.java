@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class CycleCommandsTest {
 
-  private static final Logger log = Logger.getLogger(CycleCommandsTest.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   @Autowired
   private Shell shell;
@@ -39,7 +40,7 @@ public class CycleCommandsTest {
     // Then...
     assertThat(result, instanceOf(Set.class));
     assertThat((Set<String>) result, hasItems("d", "co", "com", "www", "10", "12", "device"));
-    log.info(result);
+    LOG.info(result);
   }
 
   @Test
@@ -53,7 +54,7 @@ public class CycleCommandsTest {
     // Then...
     assertThat(result, instanceOf(List.class));
     assertEquals(Arrays.asList("Bob", "Alice", "Bob"), result);
-    log.info(Arrays.asList((String[]) result));
+    LOG.info(result);
   }
 
   @Test
@@ -69,7 +70,7 @@ public class CycleCommandsTest {
     assertEquals(
         Arrays.asList("alec-baldwin", "tom-cruise", "tom-hanks", "anne-hathaway", "hugh-jackman"),
         result);
-    log.info(result);
+    LOG.info(result);
   }
 
 }

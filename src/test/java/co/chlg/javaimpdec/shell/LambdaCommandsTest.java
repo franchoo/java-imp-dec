@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class LambdaCommandsTest {
 
   @SuppressWarnings("unused")
-  private static final Logger log = Logger.getLogger(LambdaCommandsTest.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   @Autowired
   private Shell shell;

@@ -9,14 +9,15 @@ import co.chlg.javaimpdec.TestApplicationRunner;
 import java.net.URI;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MonadControllerTest {
 
-  private static final Logger log = Logger.getLogger(MonadControllerTest.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   private URI url;
   @LocalServerPort
@@ -54,7 +55,7 @@ public class MonadControllerTest {
     assertThat(response.getBody(), notNullValue());
     assertThat((Set<String>) response.getBody().keySet(), hasItem(LUCKY_NUM));
     assertTrue((int) response.getBody().get(LUCKY_NUM) > 75);
-    log.info(response.getBody());
+    LOG.info(response.getBody());
   }
 
   @Test

@@ -1,6 +1,7 @@
 package co.chlg.javaimpdec;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -11,15 +12,15 @@ import org.springframework.boot.test.context.TestConfiguration;
 @TestConfiguration
 public class TestApplicationRunner implements ApplicationRunner {
 
-  private static final Logger log = Logger.getLogger(TestApplicationRunner.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   public TestApplicationRunner() {
-    log.info("Test Application Runner started!");
+    LOG.info("Test Application Runner started!");
   }
 
   @Override
   public void run(ApplicationArguments args) {
-    log.info("About to do nothing!");
+    LOG.info("About to do nothing!");
   }
 
 }

@@ -32,7 +32,7 @@ public class CycleCommands {
     List<String> res = new LinkedList<>();
     Iterator<Long> itB = scoresB.iterator();
     scoresA.forEach(a -> res.add(a > itB.next() ? nameA : nameB));
-    return res.toArray(new String[res.size()]);
+    return res;
     */
     return IntStream.range(0, scoresA.size())
         .mapToObj(i -> scoresA.get(i) > scoresB.get(i) ? nameA : nameB)

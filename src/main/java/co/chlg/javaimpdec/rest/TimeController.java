@@ -9,7 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 import org.apache.commons.lang3.RandomUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/time")
 public class TimeController {
 
-  private static final Logger log = Logger.getLogger(TimeController.class);
+  private static final Logger LOG = LogManager.getLogger();
 
   @GetMapping("/duration-rand/{quantity}")
   private String getRandomQuantityDuration(@PathVariable("quantity") int quantity) {
     Instant begin = Instant.now();
-    log.info(IntStream.generate(RandomUtils::nextInt).limit(quantity).average());
+    LOG.info(IntStream.generate(RandomUtils::nextInt).limit(quantity).average());
     return Duration.between(begin, Instant.now()).toString();
   }
 
